@@ -65,7 +65,7 @@
       if (!form.nome.value.trim()) { erro("Preencha seu nome completo."); form.nome.focus(); return; }
       if (!form.vai.value) { erro("Conte pra gente se você vai ao casamento."); return; }
       if (!C.rsvpEndpoint) {
-        erro("A confirmação ainda não está ligada à planilha. Configure rsvpEndpoint em js/config.js.");
+        erro("A confirmação ainda não está ligada à planilha. Configure rsvpEndpoint em config.js.");
         return;
       }
       var dados = new URLSearchParams(new FormData(form));
