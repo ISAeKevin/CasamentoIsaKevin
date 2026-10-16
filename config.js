@@ -16,7 +16,7 @@ window.SITE_CONFIG = {
 
   // Confirmação de presença: URL do Web App do Google Apps Script
   // (veja README.md, seção "Confirmação de presença")
-  rsvpEndpoint: "",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbzgBY9yWd0zCNQRUVPZBhuE5mnkkUvs3KxQ87EI977xhiRkAktDj6FOF2fhrlT3uTkXvw/exec",
 
   // Pix
   pix: {
