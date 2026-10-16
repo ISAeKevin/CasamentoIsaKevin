@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Confirmações | Isa &amp; Kevin</title>
+  <meta name="theme-color" content="#F6F4EC">
+  <link rel="icon" type="image/png" href="monograma.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --papel: #F6F4EC; --papel-2: #EDEADD; --tinta: #26372E; --musgo: #5F6F52;
+      --jade-forte: #2B7A6B; --papoula: #C4532A; --ameixa: #7B3A5C; --linha: #CFCBB8;
+      --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --sans: "Karla", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color-scheme: light; box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    *, *::before, *::after { box-sizing: inherit; }
+    body { margin: 0; background: var(--papel); color: var(--tinta); font: 400 1rem/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+    :focus-visible { outline: 2px solid var(--jade-forte); outline-offset: 3px; border-radius: 2px; }
+    main { max-width: 68rem; margin: 0 auto; padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem) 4rem; }
+    .marca { font-family: var(--serif); font-style: italic; color: var(--jade-forte); font-size: 1.2rem; text-decoration: none; }
+    h1 { font-family: var(--serif); font-weight: 300; font-style: italic; font-size: clamp(2.2rem, 1.5rem + 3.4vw, 3.8rem); line-height: 1.08; margin: 1.2rem 0 .5rem; max-width: 18ch; }
+    .resumo { color: var(--musgo); margin: 0 0 2rem; max-width: 46rem; }
+    .resumo b { color: var(--tinta); font-weight: 700; }
+
+    .botao { font: 500 .95rem var(--sans); background: var(--jade-forte); color: #fff; border: 0; border-radius: 999px; padding: .6rem 1.2rem; cursor: pointer; }
+    .botao:disabled { opacity: .6; cursor: default; }
+    .botao--leve { background: transparent; color: var(--jade-forte); border: 1px solid var(--jade-forte); }
+
+    /* Entrada */
+    .entrada { max-width: 26rem; margin-top: 2rem; }
+    .entrada label { display: block; font-weight: 500; margin-bottom: .35rem; }
+    .entrada input { width: 100%; font: inherit; padding: .65rem .8rem; border: 1px solid var(--linha); border-radius: 6px; background: #fff; color: var(--tinta); margin-bottom: .9rem; }
+    .erro { color: var(--papoula); font-weight: 500; min-height: 1.6em; }
+
+    /* Controles */
+    .controles { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1rem; }
+    .controles input[type=search] { flex: 1 1 14rem; font: inherit; padding: .55rem .8rem; border: 1px solid var(--linha); border-radius: 6px; background: #fff; color: var(--tinta); }
+    .filtro { display: inline-flex; border: 1px solid var(--linha); border-radius: 999px; overflow: hidden; }
+    .filtro button { font: 500 .9rem var(--sans); background: transparent; color: var(--tinta); border: 0; padding: .5rem .95rem; cursor: pointer; }
+    .filtro button[aria-pressed=true] { background: var(--tinta); color: var(--papel); }
+    .acoes { display: flex; gap: .5rem; margin-left: auto; }
+
+    /* Tabela */
+    .rolagem { overflow-x: auto; border-top: 1px solid var(--tinta); }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th { text-align: left; font-weight: 500; color: var(--musgo); padding: .7rem .6rem; border-bottom: 1px solid var(--linha); white-space: nowrap; }
+    th button { all: unset; cursor: pointer; }
+    th button:focus-visible { outline: 2px solid var(--jade-forte); }
+    td { padding: .75rem .6rem; border-bottom: 1px solid var(--linha); vertical-align: top; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    th.num { text-align: right; }
+    td.nome { font-family: var(--serif); font-size: 1.08rem; min-width: 11rem; }
+    td.obs { min-width: 14rem; color: var(--musgo); }
+    td.contato { white-space: nowrap; font-size: .9rem; }
+    td.contato a { color: var(--jade-forte); }
+    .sim { color: var(--jade-forte); font-weight: 700; }
+    .nao { color: var(--ameixa); font-weight: 700; }
+    .data { color: var(--musgo); white-space: nowrap; font-size: .88rem; }
+    .vazio { color: var(--musgo); padding: 2rem 0; }
+    .rodape { color: var(--musgo); font-size: .85rem; margin-top: 1rem; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<main>
+  <a class="marca" href="./">Isa &amp; Kevin</a>
+
+  <section id="tela-entrada">
+    <h1>Confirmações de presença</h1>
+    <p class="resumo">Área só dos noivos. Digite a senha do painel definida no Apps Script.</p>
+    <form class="entrada" id="form-entrada">
+      <label for="chave">Senha do painel</label>
+      <input id="chave" type="password" autocomplete="current-password" required>
+      <button class="botao" type="submit">Abrir painel</button>
+      <p class="erro" id="erro-entrada" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="tela-painel" hidden>
+    <h1 id="titulo">Carregando…</h1>
+    <p class="resumo" id="resumo"></p>
+
+    <div class="controles">
+      <input type="search" id="busca" placeholder="Buscar por nome, acompanhante ou observação" aria-label="Buscar">
+      <div class="filtro" role="group" aria-label="Filtrar respostas">
+        <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-filtro="sim" aria-pressed="false">Vão</button>
+        <button type="button" data-filtro="nao" aria-pressed="false">Não vão</button>
+      </div>
+      <div class="acoes">
+        <button class="botao botao--leve" type="button" id="btn-atualizar">Atualizar</button>
+        <button class="botao botao--leve" type="button" id="btn-csv">Baixar CSV</button>
+        <button class="botao botao--leve" type="button" id="btn-sair">Sair</button>
+      </div>
+    </div>
+
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr>
+            <th><button type="button" data-ordem="nome">Nome</button></th>
+            <th>Resposta</th>
+            <th class="num">Adultos</th>
+            <th class="num">Crianças</th>
+            <th>Acompanhantes</th>
+            <th>Contato</th>
+            <th>Observações</th>
+            <th><button type="button" data-ordem="data">Recebida em</button></th>
+          </tr>
+        </thead>
+        <tbody id="linhas"></tbody>
+      </table>
+    </div>
+    <p class="vazio" id="vazio" hidden></p>
+    <p class="rodape" id="rodape"></p>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var C = window.SITE_CONFIG || {};
+  var CHAVE_LOCAL = "painel-chave";
+  var dados = [], filtro = "todos", ordem = { campo: "data", desc: true };
+  var $ = function (s) { return document.querySelector(s); };
+
+  function guardar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+  function ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function esc(s) { return String(s || "").replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function plural(n, um, varios) { return n + " " + (n === 1 ? um : varios); }
+  function formataData(iso) {
+    var d = new Date(iso);
+    return isNaN(d) ? esc(iso) : d.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit" });
+  }
+
+  function carregar(chave) {
+    if (!C.rsvpEndpoint) return Promise.reject("O rsvpEndpoint em config.js está vazio.");
+    var url = C.rsvpEndpoint + "?chave=" + encodeURIComponent(chave) + "&t=" + Date.now();
+    return fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.ok) return j;
+      if (j.erro === "chave_invalida") throw "Senha incorreta.";
+      if (j.erro === "sem_chave") throw "A propriedade CHAVE_PAINEL ainda não foi criada no Apps Script.";
+      throw "A planilha respondeu com erro.";
+    }, function (e) {
+      if (typeof e === "string") throw e;
+      throw "Não foi possível ler a planilha. Confira se a implantação foi atualizada para a nova versão do script.";
+    });
+  }
+
+  function abrir(chave) {
+    var btn = $("#form-entrada button");
+    btn.disabled = true; $("#erro-entrada").textContent = "";
+    carregar(chave).then(function (j) {
+      guardar(CHAVE_LOCAL, chave);
+      dados = j.linhas;
+      $("#tela-entrada").hidden = true; $("#tela-painel").hidden = false;
+      desenhar(j.atualizado);
+    }).catch(function (msg) {
+      guardar(CHAVE_LOCAL, null);
+      $("#tela-painel").hidden = true; $("#tela-entrada").hidden = false;
+      $("#erro-entrada").textContent = msg;
+    }).then(function () { btn.disabled = false; });
+  }
+
+  function desenhar(atualizado) {
+    var vao = dados.filter(function (d) { return d.vai; });
+    var adultos = vao.reduce(function (s, d) { return s + d.adultos; }, 0);
+    var criancas = vao.reduce(function (s, d) { return s + d.criancas; }, 0);
+    var naoVao = dados.length - vao.length;
+
+    $("#titulo").textContent = plural(adultos + criancas, "pessoa confirmada", "pessoas confirmadas");
+    $("#resumo").innerHTML = "<b>" + plural(adultos, "adulto", "adultos") + "</b> e <b>" + plural(criancas, "criança", "crianças") +
+      "</b>, vindos de " + plural(vao.length, "resposta positiva", "respostas positivas") + ". " +
+      plural(naoVao, "convidado avisou", "convidados avisaram") + " que não vai" + (naoVao === 1 ? "" : "o") + ".";
+
+    var termo = $("#busca").value.trim().toLowerCase();
+    var lista = dados.filter(function (d) {
+      if (filtro === "sim" && !d.vai) return false;
+      if (filtro === "nao" && d.vai) return false;
+      if (!termo) return true;
+      return (d.nome + " " + d.acompanhantes + " " + d.obs + " " + d.email).toLowerCase().indexOf(termo) !== -1;
+    }).sort(function (a, b) {
+      var x = a[ordem.campo], y = b[ordem.campo];
+      var r = ordem.campo === "nome" ? x.localeCompare(y, "pt-BR") : (x < y ? -1 : x > y ? 1 : 0);
+      return ordem.desc ? -r : r;
+    });
+
+    $("#linhas").innerHTML = lista.map(function (d) {
+      var tel = d.telefone.replace(/\D/g, "");
+      var contato = [
+        d.email ? '<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + "</a>" : "",
+        tel ? '<a href="https://wa.me/' + (tel.length <= 11 ? "55" : "") + tel + '" target="_blank" rel="noopener">' + esc(d.telefone) + "</a>" : ""
+      ].filter(Boolean).join("<br>");
+      return "<tr>" +
+        '<td class="nome">' + esc(d.nome) + "</td>" +
+        "<td>" + (d.vai ? '<span class="sim">Vai</span>' : '<span class="nao">Não vai</span>') + "</td>" +
+        '<td class="num">' + (d.vai ? d.adultos : "") + "</td>" +
+        '<td class="num">' + (d.vai ? d.criancas : "") + "</td>" +
+        "<td>" + esc(d.acompanhantes) + "</td>" +
+        '<td class="contato">' + contato + "</td>" +
+        '<td class="obs">' + esc(d.obs) + "</td>" +
+        '<td class="data">' + formataData(d.data) + "</td></tr>";
+    }).join("");
+
+    var vazio = $("#vazio");
+    vazio.hidden = lista.length > 0;
+    vazio.textContent = dados.length ? "Nenhuma resposta corresponde à busca." : "Nenhuma confirmação recebida ainda. Assim que alguém responder pelo site, aparece aqui.";
+    if (atualizado) $("#rodape").textContent = "Dados lidos da planilha em " + formataData(atualizado) + ".";
+  }
+
+  function baixarCSV() {
+    var cab = ["Recebida em", "Nome", "Vai?", "Adultos", "Crianças", "Acompanhantes", "E-mail", "Telefone", "Observações"];
+    var q = function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; };
+    var linhas = dados.map(function (d) {
+      return [formataData(d.data), d.nome, d.vai ? "Sim" : "Não", d.adultos, d.criancas, d.acompanhantes, d.email, d.telefone, d.obs].map(q).join(";");
+    });
+    var blob = new Blob(["\uFEFF" + [cab.map(q).join(";")].concat(linhas).join("\r\n")], { type: "text/csv;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "confirmacoes-isa-kevin.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  $("#form-entrada").addEventListener("submit", function (e) { e.preventDefault(); abrir($("#chave").value); });
+  $("#busca").addEventListener("input", function () { desenhar(); });
+  document.querySelectorAll("[data-filtro]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      filtro = b.dataset.filtro;
+      document.querySelectorAll("[data-filtro]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      desenhar();
+    });
+  });
+  document.querySelectorAll("[data-ordem]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var c = b.dataset.ordem;
+      ordem = { campo: c, desc: ordem.campo === c ? !ordem.desc : c === "data" };
+      desenhar();
+    });
+  });
+  $("#btn-atualizar").addEventListener("click", function () { var k = ler(CHAVE_LOCAL); if (k) abrir(k); });
+  $("#btn-csv").addEventListener("click", baixarCSV);
+  $("#btn-sair").addEventListener("click", function () {
+    guardar(CHAVE_LOCAL, null); dados = [];
+    $("#linhas").innerHTML = ""; $("#chave").value = "";
+    $("#tela-painel").hidden = true; $("#tela-entrada").hidden = false;
+  });
+
+  var salva = ler(CHAVE_LOCAL);
+  if (salva) abrir(salva);
+})();
+</script>
+</body>
+</html>
